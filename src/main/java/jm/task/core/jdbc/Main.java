@@ -1,8 +1,8 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-import jm.task.core.jdbc.service.UserServiceImpl;
-import jm.task.core.jdbc.util.Util;
+
+
 
 import java.sql.*;
 
@@ -16,8 +16,8 @@ public class Main {
        userDaoJDBC.saveUser("Alex", "White", (byte) 38);
        userDaoJDBC.saveUser("Goga", "Tupin", (byte) 56);
 
-       userDaoJDBC.cleanUsersTable();
-       userDaoJDBC.dropUsersTable();
+       //userDaoJDBC.cleanUsersTable();
+       //userDaoJDBC.dropUsersTable();
 
         // реализуйте алгоритм здесь
 
