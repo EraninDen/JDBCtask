@@ -1,6 +1,8 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
+import jm.task.core.jdbc.dao.UserDao;
+import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
+
 
 
 
@@ -9,12 +11,13 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-       UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
-       userDaoJDBC.createUsersTable();
-       userDaoJDBC.saveUser("Vasya", "Puskin", (byte) 28);
-       userDaoJDBC.saveUser("Kolya", "Tolstoy", (byte) 44);
-       userDaoJDBC.saveUser("Alex", "White", (byte) 38);
-       userDaoJDBC.saveUser("Goga", "Tupin", (byte) 56);
+       UserDao userDao = new UserDaoHibernateImpl();
+       userDao.createUsersTable();
+       //userDao.saveUser("Vasya", "Puskin", (byte) 28);
+      // userDao.saveUser("Kolya", "Tolstoy", (byte) 44);
+      // userDao.saveUser("Alex", "White", (byte) 38);
+       userDao.saveUser("Goga", "Tupin", (byte) 56);
+
 
        //userDaoJDBC.cleanUsersTable();
        //userDaoJDBC.dropUsersTable();
