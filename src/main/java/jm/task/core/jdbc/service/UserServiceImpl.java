@@ -9,33 +9,38 @@ import java.util.List;
 
 
 public class UserServiceImpl implements UserService {
-    private final UserDao userDao = new UserDaoHibernateImpl();
+    private static final UserDao userDao = new UserDaoHibernateImpl();
 
     public UserServiceImpl(){
     }
 
-    public void createUsersTable() throws SQLException {
-        userDao.createUsersTable();
+    private static UserDaoHibernateImpl getUserDao(){
+        return (UserDaoHibernateImpl) userDao;
     }
 
-    public void dropUsersTable() throws SQLException {
-        userDao.dropUsersTable();
+
+    public void createUsersTable() {
+        getUserDao().createUsersTable();
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
-        userDao.saveUser(name, lastName, age);
+    public void dropUsersTable()  {
+        getUserDao().dropUsersTable();
     }
 
-    public void removeUserById(long id) throws SQLException {
-        userDao.removeUserById(id);
+    public void saveUser(String name, String lastName, byte age) {
+        getUserDao().saveUser(name, lastName, age);
     }
 
-    public List<User> getAllUsers() throws SQLException {
-        return userDao.getAllUsers();
+    public void removeUserById(long id) {
+        getUserDao().removeUserById(id);
     }
 
-    public void cleanUsersTable() throws SQLException {
-        userDao.cleanUsersTable();
+    public List<User> getAllUsers() {
+        return getUserDao().getAllUsers();
+    }
+
+    public void cleanUsersTable() {
+        getUserDao().cleanUsersTable();
     }
 
 }

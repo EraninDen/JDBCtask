@@ -13,10 +13,9 @@ import java.util.List;
 
 
 public class UserDaoHibernateImpl implements UserDao {
+
     public UserDaoHibernateImpl() {
     }
-
-
 
     @Override
     public void createUsersTable() {
@@ -26,7 +25,6 @@ public class UserDaoHibernateImpl implements UserDao {
         query.executeUpdate();
         transaction.commit();
         session.close();
-
     }
 
     @Override
@@ -38,8 +36,6 @@ public class UserDaoHibernateImpl implements UserDao {
         query.executeUpdate();
         transaction.commit();
         session.close();
-
-
     }
 
     @Override
@@ -48,8 +44,8 @@ public class UserDaoHibernateImpl implements UserDao {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.save(user);
-
         transaction.commit();
+        System.out.println("User с именем – " + name + " добавлен в базу данных");
         session.close();
     }
 
@@ -62,17 +58,18 @@ public class UserDaoHibernateImpl implements UserDao {
         session.delete(user);
         transaction.commit();
         session.close();
-
     }
 
     @Override
+    @SuppressWarnings(value = "unchecked")
 
     public List<User> getAllUsers()  {
 
         Session session = Util.getSessionFactory().openSession();
-
-
-        return session.createCriteria(User.class).list();
+        List<User> list = session.createCriteria(User.class).list();
+        session.close();
+        System.out.println(list.toString());
+        return list;
     }
 
     @Override
@@ -84,6 +81,5 @@ public class UserDaoHibernateImpl implements UserDao {
         query.executeUpdate();
         transaction.commit();
         session.close();
-
     }
 }

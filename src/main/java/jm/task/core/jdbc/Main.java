@@ -1,27 +1,48 @@
 package jm.task.core.jdbc;
 
-import jm.task.core.jdbc.dao.UserDao;
-import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 
-
+import jm.task.core.jdbc.service.*;
+import jm.task.core.jdbc.util.Util;
 
 
 import java.sql.*;
 
+
+
 public class Main {
+
+    private static final UserService userService = new UserServiceImpl();
+
+    public Main() {
+    }
+
+    private static UserServiceImpl getUserService(){
+
+        return (UserServiceImpl) userService;
+
+    }
+
+
+
+
     public static void main(String[] args) throws SQLException {
 
-       UserDao userDao = new UserDaoHibernateImpl();
-       userDao.createUsersTable();
-       //userDao.saveUser("Vasya", "Puskin", (byte) 28);
-      // userDao.saveUser("Kolya", "Tolstoy", (byte) 44);
-      // userDao.saveUser("Alex", "White", (byte) 38);
-       userDao.saveUser("Goga", "Tupin", (byte) 56);
+       getUserService().createUsersTable();
+       getUserService().saveUser("Vasya", "Puskin", (byte) 28);
+       getUserService().saveUser("Kolya", "Tolstoy", (byte) 44);
+       getUserService().saveUser("Alex", "White", (byte) 38);
+       getUserService().saveUser("Goga", "Tupin", (byte) 56);
+       getUserService().getAllUsers();
+       getUserService().cleanUsersTable();
+       getUserService().dropUsersTable();
+       Util.shutdown();
 
 
-       //userDaoJDBC.cleanUsersTable();
-       //userDaoJDBC.dropUsersTable();
-
+        // Создание таблицы User(ов)
+        // Добавление 4 User(ов) в таблицу с данными на свой выбор. После каждого добавления должен быть вывод в консоль ( User с именем – name добавлен в базу данных )
+        // Получение всех User из базы и вывод в консоль ( должен быть переопределен toString в классе User)
+        // Очистка таблицы User(ов)
+        // Удаление таблицы
         // реализуйте алгоритм здесь
 
     }
