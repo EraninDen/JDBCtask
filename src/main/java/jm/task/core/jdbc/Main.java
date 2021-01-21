@@ -1,11 +1,6 @@
 package jm.task.core.jdbc;
-
-
 import jm.task.core.jdbc.service.*;
 import jm.task.core.jdbc.util.Util;
-
-
-import java.sql.*;
 
 
 
@@ -13,16 +8,11 @@ public class Main {
 
     private static final UserService userService = new UserServiceImpl();
 
-    public Main() {
-    }
-
     private static UserServiceImpl getUserService(){
-
         return (UserServiceImpl) userService;
-
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
        getUserService().createUsersTable();
        getUserService().saveUser("Vasya", "Puskin", (byte) 28);
