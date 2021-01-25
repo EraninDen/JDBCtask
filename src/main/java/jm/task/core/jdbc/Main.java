@@ -2,6 +2,7 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.service.*;
 import jm.task.core.jdbc.util.Util;
 
+import java.sql.SQLException;
 
 
 public class Main {
@@ -12,7 +13,7 @@ public class Main {
         return (UserServiceImpl) userService;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
        getUserService().createUsersTable();
        getUserService().saveUser("Vasya", "Puskin", (byte) 28);
@@ -22,7 +23,7 @@ public class Main {
        getUserService().getAllUsers();
        getUserService().cleanUsersTable();
        getUserService().dropUsersTable();
-       Util.shutdown();
+       Util.shutdownConnect();
     }
 }
 

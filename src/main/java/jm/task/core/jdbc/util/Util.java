@@ -56,19 +56,24 @@ public class Util {
         getSessionFactory().close();
     }
 
-
+    private static Connection connection;
     public static Connection getConnection()  {
-
+        if(connection == null)
         try{
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance());
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydbtest", "root", "1234");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydbtest", "root", "1234");
             System.out.println("Connection OK");
-            return connection;
+
 
         } catch ( SQLException | IllegalAccessException | InstantiationException| ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println("Connection ERROR");
             throw new IllegalStateException();
         }
+        return connection;
+    }
+
+    public static void shutdownConnect() throws SQLException {
+        connection.close();
     }// реализуйте настройку соеденения с БД
 }
